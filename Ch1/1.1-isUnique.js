@@ -1,6 +1,6 @@
 // determine if a string has all unique characters- without using an additional data structure
 
-// Time: O(n) | Space: O(n)
+// Time: O(n) || Space: O(n)
 const isUnique = (str) => {
     if (str.length > 128) { // meaning that there is no way it can be greater in ASCII
         return false;
