@@ -1,6 +1,6 @@
 // remove duplicates from an unsorted linked list
 
-
+// Time: O(N) || Space: O(1)
 const LinkedList = function(value, number) {
     this.value = value;
     this.number = number;
