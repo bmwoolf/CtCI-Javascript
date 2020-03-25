@@ -2,9 +2,9 @@
 
 // stable method- meaning we keep the order of the nodes intact
 
-const LinkedList = function (value, number) {
+// Time: O(N) || Space: O(N)
+const LinkedList = function (value) {
     this.value = value;
-    this.number = number;
     this.next = null;
 };
 
@@ -37,6 +37,7 @@ function partitionStable (node, x) {
                 afterEnd = node;
             }
         }
+        node = next;
     }
 
     if (beforeStart === null) {
@@ -46,3 +47,31 @@ function partitionStable (node, x) {
     beforeEnd.next = afterStart;
     return beforeStart;
 }
+
+function printList (node) {
+    while (node !== null) {
+        console.log('node.value', node.value);
+        node = node.next;
+    }
+}
+
+const a = new LinkedList(1);
+const b = new LinkedList(6);
+const c = new LinkedList(19);
+const d = new LinkedList(3);
+const e = new LinkedList(5);
+const f = new LinkedList(8);
+const g = new LinkedList(10);
+
+a.next = b;
+b.next = c;
+c.next = d;
+d.next = e;
+e.next = f;
+f.next = g;
+
+printList(a); 
+console.log('-----------');
+partitionStable(a, 4);
+console.log('-----------');
+printList(a); // 1 3 6 19 5 8 10
