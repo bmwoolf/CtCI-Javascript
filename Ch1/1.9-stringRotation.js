@@ -1,6 +1,6 @@
 // find the point of rotation- basically if one of the strings is a substring of another
 
-// Time: O(N) || Space: O(N)
+// Time: O(N) || Space: O
 function isRotation(str1, str2) {
     let str1Length = str1.length;
 
