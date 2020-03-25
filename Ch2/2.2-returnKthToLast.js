@@ -1,5 +1,6 @@
 // find the kth to the lst element in a linked list
 
+// Time: O(N) || Space: O(1)
 const LinkedList = function(value, number) {
     this.value = value;
     this.number = number;
