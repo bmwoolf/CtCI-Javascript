@@ -21,29 +21,34 @@ function checkDups (head, node) {
     return false;
 };
 
+// main function to remove duplicates
+function removeDups (head) {
+    let node = head;
+    while (node !== null) {
+        // if we are not at the end of the list and 
+        console.log('head', head.value)
+        console.log('node.next',node.next.value)
+        if (node.next !== null && checkDups(head, node.next)) {
+            // skip over next node and reconnect to delete 'y
+            node.next = node.next.next;
+            // c -> e
+        } else {
+            // iterate
+            node = node.next;
+        }
+    }
+    return head;
+}
+
 // function to print the values in the nodes in LL
 function printLinkedList (head) {
     let node = head;
     console.log('start of linked list');
     while (node !== null) {
         console.log('node.value', node.value, node.number);
-        node = node.next;
+        node = node.next; // increment
     }
     console.log('end of linked list');
-}
-
-// main function to remove duplicates
-function removeDups (head) {
-    let node = head;
-    while (node !== null) {
-        // if we are not at the end of the list and 
-        if (node.next !== null && checkDups(head, node.next)) {
-            node.next = node.next.next;
-        } else {
-            node = node.next;
-        }
-    }
-    return head;
 }
 
 const a = new LinkedList('y', 1);
