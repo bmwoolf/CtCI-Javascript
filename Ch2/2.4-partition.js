@@ -37,7 +37,7 @@ function partitionStable (node, x) {
                 afterEnd = node;
             }
         }
-        node = next;
+        node = next; // next = node.next
     }
 
     if (beforeStart === null) {
@@ -72,6 +72,6 @@ f.next = g;
 
 printList(a); 
 console.log('-----------');
-partitionStable(a, 4);
+partitionStable(a, 6);
 console.log('-----------');
 printList(a); // 1 3 6 19 5 8 10
