@@ -39,22 +39,59 @@ function isEqual(firstList, secondList) {
     return firstList === null && secondList === null;
 }
 
+
+/* ---------- iterative method ---------- */
+function isPalindromeIterative (head) {
+    let fast = head;
+    let slow = head;
+    let stack = [];
+
+    while (fast !== null && fast.next !== null) {
+        stack.push(slow.value);
+        console.log('stack',stack)
+        slow = slow.next; // +1
+        fast = fast.next.next; // + 2
+    }
+
+    if (fast !== null) {
+        slow = slow.next;
+    }
+
+    while (slow !== null) {
+        let top = stack.pop();
+        if (top !== slow.value) {
+            return false;
+        }
+        slow = slow.next;
+    }
+    return true;
+}
+
 const a = new LinkedList('a');
 const b = new LinkedList('b');
-const c = new LinkedList('b');
-const d = new LinkedList('a');
+const c = new LinkedList('c');
+const d = new LinkedList('d');
+const e = new LinkedList('d');
+const f = new LinkedList('c');
+const g = new LinkedList('b');
+const h = new LinkedList('a');
 
 a.next = b;
 b.next = c;
 c.next = d;
+d.next = e;
+e.next = f;
+f.next = g;
+g.next = h;
 
-
-const e = new LinkedList('e');
-const f = new LinkedList('f');
-const g = new LinkedList('g');
+const x = new LinkedList('x');
+const y = new LinkedList('y');
+const z = new LinkedList('z');
 
 e.next = f;
 f.next = g;
 
 console.log(isPalindrome(a)); // true
 console.log(isPalindrome(e)); // false
+console.log(isPalindromeIterative(a)); // true
+console.log(isPalindromeIterative(e)); // false
