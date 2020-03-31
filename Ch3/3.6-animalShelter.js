@@ -1,4 +1,4 @@
-
+// the first animal in is the first animal out- basically a queue with two different types of data
 
 class Node {
     constructor(value) {
@@ -82,8 +82,6 @@ class Node {
   }
   
 
-
-
 class Queue {
     constructor() {
       this._list = new LinkedList();
@@ -114,3 +112,82 @@ class Queue {
   // alias
   Queue.prototype.add = Queue.prototype.enqueue;
   Queue.prototype.remove = Queue.prototype.dequeue;
+
+
+  function AnimalShelter () {
+      this.dogQueue = new Queue();
+      this.catQueue = new Queue();
+      this.wrapperQueue = new Queue();
+      this.tempQueue = new Queue;
+  }
+
+  AnimalShelter.prototype.enqueue = function(animal) {
+    if (animal.type === 'dog') {
+        // add to dog queue
+        this.dogQueue.enqueue(animal);
+    } else if (animal.type === 'cat'){
+        this.catQueue.enqueue(animal);
+    }
+    this.wrapperQueue.enqueue(animal);
+  } 
+
+  AnimalShelter.prototype.dequeueAny = function() {
+      if (this.wrapperQueue.peek() === this.dogQueue.peek()) {
+          this.dogQueue.remove();
+      } else if (this.wrapperQueue.peek() === this.catQueue.peek()) {
+          this.catQueue.remove();
+      }
+      return this.wrapperQueue.remove();
+  }
+
+  AnimalShelter.prototype.dequeueByType = function(animal) {
+    let animalQueue;
+    if (animal === 'dog') {
+        animalQueue = this.dogQueue;
+    } else if (animal === 'cat') {
+        animalQueue = this.catQueue;
+    }
+
+    while (!this.wrapperQueue.isEmpty() && this.wrapperQueue.peek().type !== animal) {
+        this.tempQueue.enqueue(this.wrapperQueue.remove());
+    }
+
+    let returnAnimal = this.wrapperQueue.remove();
+    animalQueue.remove();
+
+    while (!this.wrapperQueue.isEmpty()) {
+        this.tempQueue.enqueue(this.wrapperQueue.remove());
+    }
+
+    while (!this.tempQueue.isEmpty()) {
+        this.wrapperQueue.enqueue(this.tempQueue.remove());
+    }
+
+    return returnAnimal;
+  }
+
+
+  AnimalShelter.prototype.dequeueDog = function() {
+      return this.dequeueByType('dog');
+  }
+
+  AnimalShelter.prototype.dequeueCat = function() {
+      return this.dequeueByType('cat');
+  }
+
+
+let animal = new AnimalShelter();
+animal.enqueue({type:'dog', name:'a'});
+animal.enqueue({type:'dog', name:'b'});
+animal.enqueue({type:'cat', name:'c'});
+animal.enqueue({type:'dog', name:'d'});
+animal.enqueue({type:'cat', name:'e'});
+animal.enqueue({type:'cat', name:'f'});
+
+console.log(animal.dequeueAny());
+
+console.log(animal.dequeueCat());
+
+console.log(animal.dequeueAny());
+
+console.log(animal.dequeueAny());
